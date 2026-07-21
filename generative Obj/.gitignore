@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+# ChromaDB 向量庫 (會持續增長)
+chroma_data/
+
+# 模擬結果 (生成檔案，不追蹤)
+18districts_results_*.json
+18districts_report_*.html
+ssp_night_vibes_report.html
+
+# 簡報
+*.pptx
+
+# 除錯
+inspect2.py
+test_*.py
