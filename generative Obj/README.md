@@ -1,5 +1,10 @@
 # 動態多智能體元沙盤推演系統
 
+[![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://www.python.org/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-0.2+-green)](https://langchain-ai.github.io/langgraph/)
+[![DeepSeek](https://img.shields.io/badge/LLM-DeepSeek-orange)](https://deepseek.com)
+[![HKICT 2026](https://img.shields.io/badge/HKICT-2026-red)](https://www.hkictawards.hk/)
+
 > **Meta-Simulation Platform** — 基於 LangGraph + DeepSeek + ChromaDB 的社會動態模擬系統  
 > 2024-2026「18區日夜都繽紛」政策案例 | HKICT 2026 參賽項目
 
@@ -142,11 +147,54 @@ Phase 4: 執行模擬 → LangGraph 每日循環，即時輸出進度
 
 ```bash
 # 必須設定
-DEEPSEEK_API_KEY=sk-your-key-here
+# Windows CMD
+set DEEPSEEK_API_KEY=sk-your-key-here
+
+# Windows PowerShell
+$env:DEEPSEEK_API_KEY="sk-your-key-here"
 
 # 可選
 DEEPSEEK_MODEL=deepseek-chat        # 預設
 DEEPSEEK_BASE_URL=https://api.deepseek.com
+```
+
+---
+
+## 📋 研究基礎
+
+本系統的深水埗案例基於用戶提供的 **2024-2026 深度政策研究文件**，涵蓋：
+
+- **政策文件**：42 項繽紛活動獲批近 HK$2,800 萬；官方承認「無法分開計算獨立開支」
+- **媒體報導**：廟街首晚因噪音被迫「熄咪」；九龍城潑水節外判商 MatchLive 拖數 HK$71 萬
+- **真實數據**：深水埗家庭月入中位數 HK$24,000（全港最低之一）；光劍活動宣稱帶動 HK$1,000 萬消費
+- **質性訪談**：表演者抱怨舞台 <4m（需要 8m）；居民反映活動被嘲「無力多過原力」
+- **2026 現況**：政策從街頭夜市退移至海濱「深．啡 Sham.Coffee.Fair」咖啡市集
+
+→ 這些真實事件直接寫入 12 個智能體的 `initial_memory` 和 `background` 欄位
+
+---
+
+## 📊 模擬輸出範例
+
+執行 `python district_sim.py --sample 3` 後輸出：
+
+```
+區            噪音     人群       收入     投訴     滿意
+──────────────────────────────────────────────────────
+中西區         79dB  1.5/m² $ 2,400   28件   66%
+東區          80dB  2.7/m² $ 3,000   20件   83%
+灣仔          79dB  3.5/m² $ 2,700   22件   60%
+
+📁 結果已儲存: 18districts_results_20260720_1239.json
+```
+
+執行 `python ssp_night_vibes_sim.py` 後輸出浮現現象範例：
+
+```
+浮現現象：
+1. 經濟弱勢者的角色轉換 — 失業者從居民立場轉向同情小販
+2. 「隱形化」經營策略 — 小販改用靜音設備規避管制
+3. 區議員角色之兩難僵局 — 基層官僚陷入「執法優先」模式
 ```
 
 ---
